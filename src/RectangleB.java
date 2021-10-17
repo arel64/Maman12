@@ -113,9 +113,9 @@ public class RectangleB {
     private boolean _isPointIn(Point p){
         return (
                 (!p.isUnder(_pointSW))&&
-                        (!p.isLeft(_pointSW))&&
                         (!p.isAbove(_pointNE))&&
-                        (!p.isRight(_pointNE))
+                            (!p.isLeft(_pointSW))&&
+                                (!p.isRight(_pointNE))
         );
     }
 
