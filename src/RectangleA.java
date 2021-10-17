@@ -2,7 +2,7 @@ public class RectangleA {
     final int DEFAULT_HEIGHT_WIDTH = 1;
     private int _width;
     private int _height;
-    Point _pointSW;
+    private Point _pointSW;
     public RectangleA(int w,int h){
         this(new Point(0,0),w,h);
     }
@@ -51,7 +51,7 @@ public class RectangleA {
     }
     public boolean equals(RectangleA other){
         return (
-            _pointSW.equals(other._pointSW)&&
+            _pointSW.equals(other.getPointSW())&&
             _width==other.getWidth()&&
             _height==other.getHeight()
         );
