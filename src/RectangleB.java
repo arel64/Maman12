@@ -87,7 +87,7 @@ public class RectangleB {
         _pointNE.setX(_pointSW.getX()+initalHeight);
         _pointNE.setY(_pointSW.getX()+initalWidth);
     }
-    public boolean isIn (RectangleA r){
+    public boolean isIn (RectangleB r){
         Point otherNEPoint = r.getPointNE();
         Point otherSWPoint = r.getPointSW();
 
@@ -96,27 +96,37 @@ public class RectangleB {
                 !_pointNE.isAbove(otherNEPoint)&&
                 !_pointNE.isRight(otherNEPoint);
     }
-    public boolean overlap (RectangleA r){
+
+    public boolean overlap (RectangleB r){
         Point otherSWPoint = r.getPointSW();
         Point otherNEPoint = r.getPointNE();
         Point otherNWPoint = new Point(otherSWPoint.getX(),otherSWPoint.getY()+r.getHeight());
         Point otherSEPoint = new Point(otherSWPoint.getX()+r.getWidth(),otherSWPoint.getY());
-        if(_isPointIn(otherSWPoint)||
-                _isPointIn(otherNEPoint)||
-                _isPointIn(otherNWPoint)||
-                _isPointIn(otherSEPoint)){
+        if(_lineInterceptsHorizontal(otherSWPoint,otherSEPoint) ||
+                _lineInterceptsHorizontal(otherNEPoint,otherNWPoint)||
+                _lineInterceptsVertical(otherNWPoint,otherSWPoint)||
+                _lineInterceptsVertical(otherNEPoint,otherSEPoint)){
             return true;
         }
-        //No point is in, check for containment... If not contained then no overlap
+        //No point line is in, check for containment... If not contained then no overlap
         return isIn(r);
     }
-    private boolean _isPointIn(Point p){
-        return (
-                (!p.isUnder(_pointSW))&&
-                        (!p.isAbove(_pointNE))&&
-                            (!p.isLeft(_pointSW))&&
-                                (!p.isRight(_pointNE))
-        );
-    }
 
+    //Line is orthogonal to X axis
+    private boolean _lineInterceptsVertical(Point topPoint,Point bottomPoint){
+        if(!topPoint.isUnder(_pointSW) && !bottomPoint.isAbove(_pointNE)){
+            if(!topPoint.isLeft(_pointSW) && !topPoint.isRight(_pointNE)){
+                return true;
+            }
+        }
+        return false;
+    }
+    private boolean _lineInterceptsHorizontal(Point leftPoint,Point rightPoint){
+        if(!leftPoint.isUnder(_pointSW) && !leftPoint.isAbove(_pointNE)){
+            if(!leftPoint.isRight(_pointNE) && !rightPoint.isLeft(_pointSW)){
+                return true;
+            }
+        }
+        return false;
+    }
 }
