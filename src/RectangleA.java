@@ -96,23 +96,15 @@ public class RectangleA {
 
     //Line is orthogonal to X axis
     private boolean _lineInterceptsVertical(Point topPoint,Point bottomPoint){
-        if(!topPoint.isUnder(_pointSW) && !bottomPoint.isAbove(getPointNE())){
-            if(!topPoint.isLeft(_pointSW) && !topPoint.isRight(getPointNE())){
-                return true;
-            }
-        }
-        return false;
+        return !topPoint.isUnder(_pointSW) &&
+                !bottomPoint.isAbove(getPointNE()) &&
+                    !topPoint.isLeft(_pointSW) &&
+                        !topPoint.isRight(getPointNE());
     }
     private boolean _lineInterceptsHorizontal(Point leftPoint,Point rightPoint){
-        if(!leftPoint.isUnder(_pointSW) && !leftPoint.isAbove(getPointNE())){
-            if(!leftPoint.isRight(getPointNE()) && !rightPoint.isLeft(_pointSW)){
-                return true;
-            }
-        }
-        return false;
+        return !leftPoint.isUnder(_pointSW) &&
+                    !leftPoint.isAbove(getPointNE())&&
+                        !leftPoint.isRight(getPointNE()) &&
+                            !rightPoint.isLeft(_pointSW);
     }
-
-
-
-
 }
