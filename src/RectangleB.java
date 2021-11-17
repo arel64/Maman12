@@ -27,11 +27,11 @@ public class RectangleB {
     }
 
     public int getWidth(){
-        return _pointNE.getX() - _pointSW.getX();
+        return Math.abs(_pointNE.getX() - _pointSW.getX());
     }
 
     public int getHeight(){
-        return _pointNE.getY() - _pointSW.getY();
+        return Math.abs(_pointNE.getY() - _pointSW.getY());
     }
 
     public void setWidth(int w){
@@ -43,7 +43,11 @@ public class RectangleB {
             _pointNE.setY(_pointSW.getY() + h);
     }
     public void setPointSW(Point p){
+        int width = getWidth();
+        int height = getHeight();
         _pointSW = new Point(p);
+        _pointNE.setX(_pointSW.getX()+width);
+        _pointNE.setY(_pointSW.getY()+height);
     }
 
     public String toString(){
@@ -56,15 +60,8 @@ public class RectangleB {
         return getWidth()*getHeight();
     }
     public void move(int deltaX,int deltaY){
-        if(((_pointSW.getX() + deltaX) > 0) &&((_pointSW.getY() + deltaY) > 0)){
-            /*
-                Note:
-                that checking pointNE for positivity is redundant,
-                if neither x,y of pointSW are negative after move NE point surly isn't
-            */
             _pointSW.move(deltaX,deltaY);
             _pointNE.move(deltaX,deltaY);
-        }
     }
     public boolean equals(RectangleB other){
         return (
@@ -85,7 +82,7 @@ public class RectangleB {
         int initalWidth = getWidth();
         int initalHeight = getHeight();
         _pointNE.setX(_pointSW.getX()+initalHeight);
-        _pointNE.setY(_pointSW.getX()+initalWidth);
+        _pointNE.setY(_pointSW.getY()+initalWidth);
     }
     public boolean isIn (RectangleB r){
         Point otherNEPoint = r.getPointNE();
@@ -114,19 +111,15 @@ public class RectangleB {
 
     //Line is orthogonal to X axis
     private boolean _lineInterceptsVertical(Point topPoint,Point bottomPoint){
-        if(!topPoint.isUnder(_pointSW) && !bottomPoint.isAbove(_pointNE)){
-            if(!topPoint.isLeft(_pointSW) && !topPoint.isRight(_pointNE)){
-                return true;
-            }
-        }
-        return false;
+        return !topPoint.isUnder(_pointSW) &&
+                    !bottomPoint.isAbove(_pointNE) &&
+                        !topPoint.isLeft(_pointSW) &&
+                            !topPoint.isRight(_pointNE);
     }
     private boolean _lineInterceptsHorizontal(Point leftPoint,Point rightPoint){
-        if(!leftPoint.isUnder(_pointSW) && !leftPoint.isAbove(_pointNE)){
-            if(!leftPoint.isRight(_pointNE) && !rightPoint.isLeft(_pointSW)){
-                return true;
-            }
-        }
-        return false;
+        return !leftPoint.isUnder(_pointSW) &&
+                    !leftPoint.isAbove(_pointNE)&&
+                        !leftPoint.isRight(_pointNE) &&
+                            !rightPoint.isLeft(_pointSW);
     }
 }

@@ -6,7 +6,6 @@
  */
 public class Point {
 
-    final int DEFAULT_VAL = 0;
 
     private int _x;
     private int _y;
@@ -17,8 +16,8 @@ public class Point {
      * @param y y value
      */
     public Point(int x, int y){
-        _x = (x>DEFAULT_VAL)?x:DEFAULT_VAL;
-        _y = (y>DEFAULT_VAL)?y:DEFAULT_VAL;
+        _x = x;
+        _y = y;
     }
 
     /**
@@ -26,8 +25,9 @@ public class Point {
      * @param other Point to copy
      */
     public Point(Point other){
-        //Checks on the other constructor are redundent on this call
-        this(other.getX(), other.getY());
+        //Checks are redundent, we assume other point has been intialized correctly
+        this._x = other.getX();
+        this._y = other.getY();
     }
 
     /**
@@ -36,11 +36,8 @@ public class Point {
      * @param deltaY amount to move point along y-axis
      */
     public void move(int deltaX,int deltaY){
-        if ((_x + deltaX)>=0 && (_y + deltaY) >=0){
-            //Does not use set because check are already made
             _x = _x+deltaX;
             _y = _y+deltaY;
-        }
     }
 
     /**
@@ -121,9 +118,9 @@ public class Point {
      * @param num number to set x value to, must be positive integer
      */
     public void setX(int num){
-        if(num>=DEFAULT_VAL){
-            _x = num;
-        }
+
+        _x = num;
+
     }
 
     /**
@@ -131,9 +128,9 @@ public class Point {
      * @param num number to set y value to, must be positive integer
      */
     public void setY(int num){
-        if(num>=DEFAULT_VAL){
-            _y = num;
-        }
+
+        _y = num;
+
     }
     public String toString(){
         return "("+_x+","+_y+")";
