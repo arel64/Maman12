@@ -11,9 +11,9 @@ public class Point {
     private int _y;
 
     /**
-     * Construct Point by x,y (x,y) in grid
-     * @param x x value
-     * @param y y value
+     * Constructor for objects of class Point Constructs a new point with the specified x y coordinates
+     * @param x the x coordinate
+     * @param y the y coordinate
      */
     public Point(int x, int y){
         _x = x;
@@ -21,8 +21,8 @@ public class Point {
     }
 
     /**
-     * Copy constructor
-     * @param other Point to copy
+     * Copy constructor, constructs and initializes a point using another point
+     * @param other The point from which to construct the new object
      */
     public Point(Point other){
         //Checks are redundent, we assume other point has been intialized correctly
@@ -31,9 +31,9 @@ public class Point {
     }
 
     /**
-     * Amount to move point along the x and y axes. Must cause either to be negative
-     * @param deltaX amount to move point along x-axis
-     * @param deltaY amount to move point along y-axis
+     * Moves the current point , at location (x,y) to a new location. This new location is determined by deltaX which changes X's position along the X axis and deltaY which changes Y's position along the Y axis.
+     * @param deltaX the distance to move the current point along the X axis
+     * @param deltaY the distance to move the current point along the Y axis
      */
     public void move(int deltaX,int deltaY){
             _x = _x+deltaX;
@@ -41,9 +41,9 @@ public class Point {
     }
 
     /**
-     * Calculate the Distance between this point and the paramter point given
-     * @param p point to measure distance to
-     * @return Distance between this point and param
+     * Calculates the distance between two points.
+     * @param p  the second point whose distance from the current point is to be calculated
+     * @return the distance between the current point and the point passed as a parameter.
      */
     public double distance(Point p){
         return Math.sqrt(
@@ -53,88 +53,89 @@ public class Point {
     }
 
     /**
-     * Are the points equal(Same x,y)
-     * @param other Point to compare to
-     * @return true if they are the same point false otherwise
+     * Checks if two points are equal.
+     * @param other The point to be compared with the current point.
+     * @return true if the point to be compared is equal to the current point.
      */
     public boolean equals(Point other){
         return (_x == other.getX()) && (_y == other.getY());
     }
 
     /**
-     * Returns whether a point has a greater y coordinate(is above)
-     * @param other point to check against
-     * @return true if this point is above false otherwise
+     * Checks if the current point is above the point it is to be compared with.
+     * @param other  the point to be compared with the current point.
+     * @return true if the current point is above the pointit is to be compared with..
      */
     public boolean isAbove(Point other){
         return _y>other.getY();
     }
 
     /**
-     * Returns whether a point has a smaller y coordinate(is under)
-     * @param other point to check against
-     * @return true if this point is below false otherwise
+     * Checks if the current point is beneath the point it is to be compared with.
+     * @param other the point to be compared with the current point.
+     * @return true if the current point is beneath the point it is to be compared with
      */
     public boolean isUnder(Point other){
         return other.isAbove(this);
     }
 
     /**
-     * Returns whether a point has a smaller x coordinate(is left)
-     * @param other point to check against
-     * @return true if this point is left to compare point false otherwise
+     * Checks if the current point is left of the point it is to be compared with.
+     * @param other  the point to be compared with the current point
+     * @return true if the current point is left of the point it is to be compared with.
      */
     public boolean isLeft(Point other){
         return _x<other.getX();
     }
 
     /**
-     * Returns whether a point has a greater x coordinate(is right)
-     * @param other point to check against
-     * @return true if this point is right to compare point false otherwise
+     * Checks if the current point is right of the point it is to be compared with.
+     * @param other  the point to be compared with the current point
+     * @return true if the current point is right of the point it is to be compared with.
      */
     public boolean isRight(Point other){
         return other.isLeft(this);
     }
 
     /**
-     * Return X of point
-     * @return x value of point
+     * Returns the x coordinate of the point.
+     * @return the x coordinate of the point
      */
     public int getX(){
         return _x;
     }
 
     /**
-     * Return Y of point
-     * @return Y value of point
+     * Returns the y coordinate of the point.
+     * @return the y coordinate of the point
      */
     public int getY(){
         return _y;
     }
 
     /**
-     * Set X of point to num given,
-     * @param num number to set x value to, must be positive integer
+     * Sets the x coordinate of the point
+     * @param num a new value for the X coordinate
      */
     public void setX(int num){
-
         _x = num;
-
     }
 
     /**
-     * Set Y of point to num given,
-     * @param num number to set y value to, must be positive integer
+     * Sets the y coordinate of the point
+     * @param num a new value for the Y coordinate
      */
     public void setY(int num){
 
         _y = num;
 
     }
+
+    /**
+     * Representation of the object in String
+     * @return the coordinates of a point as a string; for example : (1,2)
+     */
     public String toString(){
         return "("+_x+","+_y+")";
     }
-
-
 }
