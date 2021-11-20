@@ -25,7 +25,7 @@ public class Point {
      * @param other The point from which to construct the new object
      */
     public Point(Point other){
-        //Checks are redundent, we assume other point has been intialized correctly
+        //Checks aren't needed , we assume other point has been initialized correctly
         this._x = other.getX();
         this._y = other.getY();
     }
@@ -46,6 +46,7 @@ public class Point {
      * @return the distance between the current point and the point passed as a parameter.
      */
     public double distance(Point p){
+        //Using the distance formula d=sqrt([x1-x2]^2+[y1-y2]^2)
         return Math.sqrt(
                 Math.pow(_x - p.getX(),2) +
                 Math.pow(_y - p.getY(),2)
